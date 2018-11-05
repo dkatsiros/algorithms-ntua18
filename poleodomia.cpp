@@ -146,7 +146,6 @@ int main()
       else{
         ka[i]=l[i]*(arr[i].num)+ka[(i-l[i])];
       }
-      //cout << ka[i] <<' ';
     }
     kd[n-1]=arr[n-1].num;
     for (ulli i=n-2;i!=-1;i--){
