@@ -1,8 +1,12 @@
+#include <stdio.h>
 #include <iostream>
 using namespace std;
-long long int* d;
-long long int* d_inv;
+long long int lis[500000],lis2[500000];
+long long int d[500000];
+long long int d_inv[500000];
 long long int n;
+long long int v[500000];
+long long int v_inv[500000];
 // Binary search (note boundaries in the caller)
 int CeilIndex(long long int* v, long long int l, long long int r, long long int key)
 {
@@ -31,7 +35,7 @@ long long int BotIndex(long long int* v, long long int l, long long int r, long 
 }
 
 
-long long int LongestIncreasingSubsequenceLength(long long int* v)
+long long int LongestIncreasingSubsequenceLength(long long int v[])
 {
 	if (n == 0)
 		return 0;
@@ -106,32 +110,30 @@ long long int LongestDecreasingSubsequenceLength(long long int* v)
 
 int main()
 {
-  cin >> n;
-  long long int v[n];
-  for ( int i = 0; i < n; i++){
-    cin >> v[i];
+  scanf("%lli",&n);
+  // long long int v[n];
+  for (long long int i = 0; i < n; i++){
+    scanf("%lli",&v[i]);
   }
-  d = (long long int*) malloc(n * sizeof(long long int));
+  //d = (long long int*) malloc(n * sizeof(long long int));
   LongestIncreasingSubsequenceLength(v);
 // original array
   d[0] = 1;
   // invert array
-  long long int v_inv[n];
-  for (int i = 0; i < n ; i++){
+  // long long int v_inv[n];
+  for (long long int i = 0; i < n ; i++){
     v_inv[i] = v[n-1-i];
   }
-  d_inv = (long long int*) malloc(n * sizeof(long long int));
+  //d_inv = (long long int*) malloc(n * sizeof(long long int));
   LongestDecreasingSubsequenceLength(v_inv);
   d_inv[0] = 1;
-  long long int d_inv2[n];
-  for (int i = 0; i < n ; i++){
-    d_inv2[i] = d_inv[n-1-i];
-  }
-  for (int i = 0; i < n ; i++){
-    d_inv[i] = d_inv2[i];
+  long long int temp;
+  for (long long int i = 0; i < n/2 ; i++){
+		temp = d_inv[i] ;
+    d_inv[i] = d_inv[n-1-i];
+		d_inv[n-1-i] = temp;
   }
 
-  long long int lis[n],lis2[n];
   lis[0] = d[0];
   lis2[n-1] = d_inv[n-1];
   for (int i = 1; i < n ; i++){
@@ -161,7 +163,7 @@ int main()
   //
   cout << max << endl;
 // free everything, and return
-  free(d);
-  free(d_inv);
+  // free(d);
+  // free(d_inv);
   return 0;
 }
