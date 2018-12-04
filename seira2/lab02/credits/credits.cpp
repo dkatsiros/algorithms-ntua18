@@ -136,21 +136,21 @@ int main()
 
   lis[0] = d[0];
   lis2[n-1] = d_inv[n-1];
-  for (int i = 1; i < n ; i++){
+  for (long int i = 1; i < n ; i++){
     lis[i] = max(lis[i-1],d[i]);
   }
-  for(int i = n-2; i >= 0; i--){
+  for(long int i = n-2; i >= 0; i--){
     lis2[i] = max(lis2[i+1],d_inv[i]);
   }
   long long int final[n+1];
   final[0] = lis2[1];
   final[n-1] = lis[n-2];
   final[n] = lis[n-1];
-  for (int k = 0;k < n-1;k++){
+  for (long int k = 0;k < n-1;k++){
     final[k]=lis[k]+lis2[k+1];
   }
   long long int max = final[0];
-  for (int i = 1;i < n + 1;i++){
+  for (long int i = 1;i < n + 1;i++){
     if(final[i] > max) max = final[i];
   }
   // for (int i = 0; i < n ; i++){
