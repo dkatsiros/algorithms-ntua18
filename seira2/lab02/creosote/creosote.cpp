@@ -128,22 +128,27 @@ int main() {
   for (i = 0; i < n; i++){
     scanf("%lli",&x[i]);
   }
-  s[0] = x[0];
-  for (i = 1; i < n; i++){
-    s[i] = s[i-1] + x[i];
+  s[0] = 0;
+  s[1] = x[0];
+  for (i = 2; i < n + 1; i++){
+    s[i] = s[i-1] + x[i - 1];
   }
+  c[0] = 0;
+  c[1] =  (  A * s[1] * s[1]  + B * s[1] + C ) ;
+  line_a = (-2) * A * s[0];
+  line_b = ( c[0] + A * s[0] * s[0] );
+  h.add_line(line_a,line_b);
 
-  c[0] =  (  A * pow( s[0] , 2) + B * s[0] + C ) ;
 
-  for(i = 1;i < n ;i++){
+  for(i = 2;i < n + 1 ;i++){
 
       j = i;
       line_a = (-2) * A * s[j-1];
-      line_b = ( c[j - 1] + A * pow(s[j - 1] , 2 ) - B * s[j - 1] );
+      line_b = ( c[j - 1] + A * s[j - 1] * s[j - 1]  - B * s[j - 1] );
       h.add_line(line_a,line_b);
-      c[i] = ( A * pow( s[i] , 2) + B * s[i] + C ) + h.query(s[i]);
+      c[i] = ( A *  s[i] * s[i]  + B * s[i] + C ) + h.query(s[i]);
   }
 
-  printf("%lli\n", c[n-1] );
+  printf("%lli\n", c[n] );
   return 0;
 }
