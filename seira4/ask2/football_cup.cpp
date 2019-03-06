@@ -7,8 +7,24 @@ using namespace std;
 #include <iostream>
 #include <list>
 #include <stack>
-using namespace std;
 
+int read_int()
+{
+    int n = 0;
+    char c = getchar_unlocked();
+    while (!('0' <= c && c <= '9'))
+    {
+        c = getchar_unlocked();
+    }
+    while ('0' <= c && c <= '9')
+    {
+        n = n * 10 + c - '0';
+        c = getchar_unlocked();
+    }
+    return n;
+}
+
+long long int countMax = 0;
 class Graph
 {
     int V;          // No. of vertices
@@ -45,13 +61,15 @@ void Graph::DFSUtil(int v, bool visited[])
 {
     // Mark the current node as visited and print it
     visited[v] = true;
-    cout << v << " ";
-
+    // cout << v << " ";
+    countMax++;
     // Recur for all the vertices adjacent to this vertex
     list<int>::iterator i;
     for (i = adj[v].begin(); i != adj[v].end(); ++i)
         if (!visited[*i])
+        {
             DFSUtil(*i, visited);
+        }
 }
 
 Graph Graph::getTranspose()
@@ -123,8 +141,8 @@ void Graph::printSCCs()
         if (visited[v] == false)
         {
             gr.DFSUtil(v, visited);
-            cout << endl;
         }
+        break;
     }
 }
 
@@ -143,23 +161,24 @@ void Graph::printSCCs()
 //     return 0;
 // }
 
-int main()
+int main(void)
 {
-    int N = 30000;
-    int d[N][N];
-    int n;
-    scanf("%d",&n);
+    int n = read_int();
+    // scanf("%d",&n);
     // Create graph
     Graph g(n);
+    int firstNumber,w;
     for (int i = 0 ; i < n ; i++ )
     {
-        scanf("%d",&d[i][0]);
-        for (int j = 1 ; j <= d[i][0]; j++)
+        // scanf("%d",&d[i][0]);
+        firstNumber = read_int();
+        for (int j = 1 ; j <= firstNumber; j++)
         {
-            scanf("%d",&d[i][j]);
-            // h omada i+1 xanei apo thn d[i][j] ( omada --> xanei apo --> omada)
-            g.addEdge(i+1 , d[i][j]);
+            // scanf("%d",&d[i][j]);
+            w = read_int();
+            g.addEdge(w - 1, i);
         }
     }
     g.printSCCs();
+    printf("%lld\n",countMax);
 }
