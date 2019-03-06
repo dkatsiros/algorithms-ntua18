@@ -5,26 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug",
-            "type": "gdb",
-            "request": "launch",
-            "target": "${workspaceRoot}/robbery",
-            //"arguments":"< ${workspaceRoot}/testcase.txt",
-            "cwd": "${workspaceRoot}",
-            "internalConsoleOptions": "openOnSessionStart"
-        },
-        {
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/submarine",
+            "program": "${workspaceFolder}/football_cup",
             "args": [
-                "-input", "cf", "${workspaceFolder}/testcase.txt"
+                "-input","cf","${workspaceFolder}/test"
             ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole":false,
+            "externalConsole": true,
             "MIMode": "gdb",
             "setupCommands": [
                 {
@@ -38,10 +29,9 @@
             "name": "Debug",
             "type": "gdb",
             "request": "launch",
-            "target": "${workspaceRoot}/submarine",
-            "arguments":"< ${workspaceRoot}/testcase.txt",
+            "target": "${workspaceFolder}/football_cup",
             "cwd": "${workspaceRoot}",
-            "internalConsoleOptions": "openOnSessionStart"
+            "arguments": "< ${workspaceFolder}/test"
         }
     ]
 }

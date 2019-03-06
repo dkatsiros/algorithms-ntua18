@@ -113,7 +113,7 @@ void createPossibleSolutionTable(int k ){
                     Coordinates* temp = InvPilotCrossingTable[x][y];
                     possibleSolutionTable[temp->x][temp->y][k + 1] = (
                         possibleSolutionTable[temp->x][temp->y][k + 1] +
-                        possibleSolutionTable[temp->x][temp->y][k] ) % S;
+                        possibleSolutionTable[x][y][k] ) % S;
                     possibleSolutionTable[x][y][k] = 0;
                 }
                 else{
