@@ -105,14 +105,14 @@ void dijkstra(int V , int src, int dest)
     }
 
     // print the constructed distance array
-    printSolution(dist, V);
+    // printSolution(dist, V);
     // save Solutions
     // for( int i=1 ; i< V; i++)
     // {
     //     minDist[src][i] = findMin(dist[i],minDist)
     // }
     int min = dist[dest];
-    for(int i=0;i<=p+1 ;i++)
+    for(int i=0;i<=p ;i++)
     {
         if( dist[ dest + i* N ] < min)
         {
@@ -120,7 +120,15 @@ void dijkstra(int V , int src, int dest)
         }
         
     }
-    printf("%ld\n",min);
+    if (min != INT_MAX )
+    {
+        printf("%ld\n",min);
+    }
+    else
+    {
+        printf("IMPOSSIBLE\n");
+    }
+    
 }
 
 // driver program to test above function
@@ -152,14 +160,15 @@ int main()
     setGraphZeros();
     long int dUV;
 
-    for(int i = 0; i < N; i++)
+    for(int i = 0; i < M; i++)
     {
-        u = read_int();
-        v = read_int();
-        scanf("%ld",dUV);
+        u = read_int() - 1 ;
+        v = read_int() - 1;
+        scanf("%ld",&dUV);
         graph[u][v] = dUV;
         for(int k = 1 ; k <= K ; k++)
         {
+            graph[u + N * k][v + N *k ] = dUV;
             // x,y e [1 eos v + k-Nades]
             graph[v + N*(k-1)][u + N*k ] = dUV;
         }
@@ -167,8 +176,8 @@ int main()
 
     for(int i = 0; i < Q; i++)
     {
-        u = read_int();
-        v = read_int();
+        u = read_int() - 1;
+        v = read_int() - 1;
         p = read_int();
         questions[i][0] = u;
         questions[i][1] = v;
